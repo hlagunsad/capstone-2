@@ -22,10 +22,8 @@ Privacy: Public
 HTTP method : GET
 Route: /api/users/login
 body: 
-	firstname, lastname, mobileNo (string)
 	Email (string)
 	Password (string)
-	isAdmin (Boolean - defaults to false)
 Privacy: Public
 
 
@@ -115,7 +113,7 @@ body:
 	  }
 
 	]
-Privacy: User only
+Privacy: Authenticated
 
 
 ## Retrieve authenticated user’s orders ##
@@ -135,7 +133,7 @@ body:
 	  }
 
 	]
-Privacy: User only
+Privacy: Authenticated
 
 
 ## Retrieve all orders (Admin only) ##

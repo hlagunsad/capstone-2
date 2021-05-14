@@ -3,11 +3,11 @@ const UserSchema = new mongoose.Schema(
 	{
 		firstName: {
 			type: String,
-			required: true
+			required: false
 		},
 		lastName: {
 			type: String,
-			required: true
+			required: false
 		},
 		email: {
 			type: String,
@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
 		},
 		mobileNo: {
 			type: String,
-			required: true
+			required: false
 		}
 
 });
