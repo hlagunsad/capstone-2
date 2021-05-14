@@ -1,7 +1,9 @@
 const router = require('express').Router();
-const {register, login, setToAdmin} = require('./../controllers/userControllers.js')
+const {register,
+	login,
+	setToAdmin } = require('./../controllers/userControllers.js')
 
-router.post('/api/users', register);
-router.get('/api/users/login', login);
-router.put('/api/users/:userId', setToAdmin);
+router.post('/', register);
+router.get('/login', login);
+router.put('/:userId', setToAdmin);
 module.exports = router;

@@ -38,7 +38,7 @@ Privacy: Admin only
 
 
 
-PRODUCT
+PRODUCTS
 
 ## Retrieve all active products ##
 HTTP Method: GET
@@ -90,13 +90,13 @@ Privacy: Admin only
 HTTP Method: PUT
 Route: /api/products/:productId/archive
 body: 
-	Name (string)
-	Description (string)
-	Price (number)
 	isActive (Boolean - defaults to true)
-	createdOn (Date - defaults to current date of creation)
 Privacy: Admin only
 
+
+
+
+ORDERS
 
 ## Non-admin User checkout (Create Order) ##
 HTTP Method: POST
