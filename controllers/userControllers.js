@@ -1,4 +1,5 @@
 const User = require('./../models/User.js');
+const bcrypt = require('bcrypt');
 
 module.exports.register = (req, res) => 
 	{
@@ -8,13 +9,14 @@ module.exports.register = (req, res) =>
 			if (req.body.confirmPassword !== req.body.password )
 			res.send(`Your password didn't match.`);
 			else {
+				const hash = bcrypt.hashSync(req.body.password, 2);
 				User.create(
 					{
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,
 						email: req.body.email,
 						mobileNo: req.body.mobileNo,
-						password: req.body.password
+						password: hash
 					}).then( user => res.send(user)).catch( err => res.send(err.message));
 			}
 		}
