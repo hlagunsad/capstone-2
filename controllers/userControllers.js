@@ -1,5 +1,8 @@
 const User = require('./../models/User.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const passkey = "ecommerceapi";
+const {createAccessToken} = require('./../auth.js')
 
 module.exports.register = (req, res) => 
 	{
@@ -32,8 +35,10 @@ module.exports.login = (req, res) =>
 					let matchedPW = bcrypt.compareSync(req.body.password, user.password);
 					if (!matchedPW)
 						res.send(`Wrong password.`);
-					else
+					else {
+						console.log({auth: createAccessToken(user)});
 						res.send(`Login successful.`)
+					}
 				}
 			}).catch( err => res.send(err.message))
 	}
