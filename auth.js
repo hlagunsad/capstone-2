@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const passkey = "coursebookingapi";
+const passkey = "ecommerceapi";
 
 module.exports.createAccessToken = (user) => {
 	let payload = {
@@ -14,7 +14,7 @@ module.exports.createAccessToken = (user) => {
 module.exports.verify = (req, res, next) => {
 	let token = req.headers.authorization;
 	if(typeof token === "undefined")
-		res.send({auth: "failed"});
+		res.send(err.message);
 	else{
 		token = token.slice(7, token.length);
 		jwt.verify(token, passkey, function(err, decoded) {
@@ -31,7 +31,7 @@ module.exports.verify = (req, res, next) => {
 
 module.exports.verifyAdmin = (req, res, next) => {
 	if (!req.user.isAdmin)
-		res.send(false)
+		res.send(`You don't have a privilege to make this action.`)
 	else{
 		next();
 	}
