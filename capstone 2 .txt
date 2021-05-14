@@ -1,0 +1,204 @@
+Objectives:
+Create an E-Commerce REST API MVP using ExpressJS
+Design Models appropriate for an E-Commerce use case.
+Send REST requests using POSTMAN Client 
+
+E-commerce API MVP requirements:
+
+USER
+
+## User registration ##
+HTTP method : POST
+Route: /api/user/registration
+body: 
+	firstname, lastname, mobileNo (string)
+	Email (string)
+	Password (string)
+	isAdmin (Boolean - defaults to false)
+Privacy: Public
+
+
+## User authentication -Login ##
+HTTP method : GET
+Route: /api/user/login
+body: 
+	firstname, lastname, mobileNo (string)
+	Email (string)
+	Password (string)
+	isAdmin (Boolean - defaults to false)
+Privacy: Public
+
+
+## Set user as admin (Admin only) ##
+HTTP method : PUT
+Route: /api/user/login
+body: 
+	firstname, lastname, mobileNo (string)
+	Email (string)
+	Password (string)
+	isAdmin (Boolean - defaults to false)
+Privacy: Admin only
+
+
+
+PRODUCT
+
+## Retrieve all active products ##
+HTTP Method: GET
+Route: /api/products/
+body: 
+	Name (string)
+	Description (string)
+	Price (number)
+	isActive (Boolean - defaults to true)
+	createdOn (Date - defaults to current date of creation)
+Privacy: Public?
+
+
+## Retrieve single product ##
+HTTP Method: GET
+Route: /api/products/:productId
+body: 
+	Name (string)
+	Description (string)
+	Price (number)
+	isActive (Boolean - defaults to true)
+	createdOn (Date - defaults to current date of creation)
+Privacy: Public?
+
+
+## Create Product (Admin only) ##
+HTTP Method: POST
+Route: /api/products/
+body: 
+	Name (string)
+	Description (string)
+	Price (number)
+	isActive (Boolean - defaults to true)
+	createdOn (Date - defaults to current date of creation)
+Privacy: Admin only
+
+## Update Product information (Admin only) ##
+HTTP Method: PUT
+Route: /api/products/:productId
+body: 
+	Name (string)
+	Description (string)
+	Price (number)
+	isActive (Boolean - defaults to true)
+	createdOn (Date - defaults to current date of creation)
+Privacy: Admin only
+
+## Archive Product (Admin only) ##
+HTTP Method: PUT
+Route: /api/products/:productId/archive
+body: 
+	Name (string)
+	Description (string)
+	Price (number)
+	isActive (Boolean - defaults to true)
+	createdOn (Date - defaults to current date of creation)
+Privacy: Admin only
+
+
+## Non-admin User checkout (Create Order) ##
+HTTP Method: POST
+Route: /api/orders/
+body: 
+	totalAmount (number)
+	purchasedOn (Date - defaults to current date of creation)
+	userId (string)
+	products: [subdocument array of bought products:
+	  
+	  {
+	    productId: (string)
+	    Stretch Goal:
+	    quantity: (number)
+	    subtotal: (number)
+	  }
+
+	]
+Privacy: User only
+
+
+## Retrieve authenticated user’s orders ##
+HTTP Method: GET
+Route: /api/orders/orderId
+body: 
+	totalAmount (number)
+	purchasedOn (Date - defaults to current date of creation)
+	userId (string)
+	products: [subdocument array of bought products:
+	  
+	  {
+	    productId: (string)
+	    Stretch Goal:
+	    quantity: (number)
+	    subtotal: (number)
+	  }
+
+	]
+Privacy: User only
+
+
+## Retrieve all orders (Admin only) ##
+HTTP Method: GET
+Route: /api/orders/
+body: 
+	totalAmount (number)
+	purchasedOn (Date - defaults to current date of creation)
+	userId (string)
+	products: [subdocument array of bought products:
+	  
+	  {
+	    productId: (string)
+	    Stretch Goal:
+	    quantity: (number)
+	    subtotal: (number)
+	  }
+
+	]
+Privacy: Admin Only
+
+
+
+
+
+Data Model Requirements:
+
+User
+Email (string)
+Password (string)
+isAdmin (Boolean - defaults to false)
+
+Product
+Name (string)
+Description (string)
+Price (number)
+isActive (Boolean - defaults to true)
+createdOn (Date - defaults to current date of creation)
+
+Order
+totalAmount (number)
+purchasedOn (Date - defaults to current date of creation)
+userId (string)
+products: [subdocument array of bought products:
+  
+  {
+    productId: (string)
+    Stretch Goal:
+    quantity: (number)
+    subtotal: (number)
+  }
+
+]
+
+Order Must be associated with:
+A user who owns the order
+Products that belong to the order
+
+Stretch Goals:
+Gather more details from user during registration (firstname, lastname, mobileNo)
+Edit user profile (Non-Admin Only)
+Add subtotal and item quantity in products subdocument
+
