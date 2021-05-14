@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 module.exports.register = (req, res) => 
 	{
 		if (req.body.password.length < 8)
-			res.send(`password needs to be minimum of eight characters`);
+			res.send(`Your password needs to be minimum of eight characters.`);
 		else {
 			if (req.body.confirmPassword !== req.body.password )
 			res.send(`Your password didn't match.`);
@@ -29,7 +29,8 @@ module.exports.login = (req, res) =>
 				if (!user)
 					res.send(`Login details (email) not found.`)
 				else{
-					if (req.body.password !== user.password)
+					let matchedPW = bcrypt.compareSync(req.body.password, user.password);
+					if (!matchedPW)
 						res.send(`Wrong password.`);
 					else
 						res.send(`Login successful.`)
