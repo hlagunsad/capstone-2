@@ -9,7 +9,7 @@ USER
 
 ## User registration ##
 HTTP method : POST
-Route: /api/user/registration
+Route: /api/users/registration
 body: 
 	firstname, lastname, mobileNo (string)
 	Email (string)
@@ -18,9 +18,9 @@ body:
 Privacy: Public
 
 
-## User authentication -Login ##
+## User authentication - Login ##
 HTTP method : GET
-Route: /api/user/login
+Route: /api/users/login
 body: 
 	firstname, lastname, mobileNo (string)
 	Email (string)
@@ -31,11 +31,8 @@ Privacy: Public
 
 ## Set user as admin (Admin only) ##
 HTTP method : PUT
-Route: /api/user/login
+Route: /api/users/:id
 body: 
-	firstname, lastname, mobileNo (string)
-	Email (string)
-	Password (string)
 	isAdmin (Boolean - defaults to false)
 Privacy: Admin only
 
