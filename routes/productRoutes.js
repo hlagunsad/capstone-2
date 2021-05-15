@@ -10,6 +10,6 @@ const {verify, verifyAdmin} = require('./../auth.js');
 router.get('/', viewAllProducts);
 router.get('/:prodId', viewSingleProduct);
 router.post('/', verify, verifyAdmin, createProduct);
-router.put('/:prodId', updateProduct);
+router.put('/:prodId', verify, verifyAdmin, updateProduct);
 router.put('/:prodId/archive', archiveProduct);
 module.exports = router;

@@ -36,3 +36,11 @@ module.exports.verifyAdmin = (req, res, next) => {
 		next();
 	}
 }
+
+module.exports.verifyUser = (req, res, next) => {
+	if (req.user.isAdmin)
+		res.send(`An Admin cannot do this action.`)
+	else{
+		next();
+	}
+}

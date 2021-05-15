@@ -21,11 +21,15 @@ module.exports.createProduct = (req, res) => {
 	newProduct.save().then( product => res.send(product)).catch( err => res.send(err.message));
 }
 	
-module.exports.updateProduct = (req, res) => 
-	res.send({
+module.exports.updateProduct = (req, res) => {
+	let updatedProduct = {
 		Name: req.body.Name,
 		Description: req.body.Description,
 		Price: req.body.Price
-	});	
+	}
+
+	Product.findByIdAndUpdate(req.params.prodId, updatedProduct).then( product => res.send(product)).catch( err => {res.send(false)})
+}
+
 module.exports.archiveProduct = (req, res) => 
 	res.send({isActive: false});
