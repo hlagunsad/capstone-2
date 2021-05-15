@@ -3,7 +3,8 @@ const {viewAllProducts,
 	viewSingleProduct,
 	createProduct,
 	updateProduct,
-	archiveProduct } = require('./../controllers/productControllers.js')
+	archiveProduct,
+	viewInactiveProducts } = require('./../controllers/productControllers.js')
 const Product = require('./../models/Product.js');	
 const {verify, verifyAdmin} = require('./../auth.js');
 
