@@ -11,5 +11,5 @@ router.get('/', viewAllProducts);
 router.get('/:prodId', viewSingleProduct);
 router.post('/', verify, verifyAdmin, createProduct);
 router.put('/:prodId', verify, verifyAdmin, updateProduct);
-router.put('/:prodId/archive', archiveProduct);
+router.put('/:prodId/archive', verify, verifyAdmin, archiveProduct);
 module.exports = router;

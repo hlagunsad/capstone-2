@@ -31,5 +31,10 @@ module.exports.updateProduct = (req, res) => {
 	Product.findByIdAndUpdate(req.params.prodId, updatedProduct).then( product => res.send(product)).catch( err => {res.send(false)})
 }
 
-module.exports.archiveProduct = (req, res) => 
-	res.send({isActive: false});
+module.exports.archiveProduct = (req, res) => {
+	let archivedProduct = {
+		isActive: false
+	}
+
+	Product.findByIdAndUpdate(req.params.prodId, archivedProduct).then( product => res.send(product)).catch( err => {res.send(false)})
+}
