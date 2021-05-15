@@ -14,7 +14,7 @@ module.exports.createAccessToken = (user) => {
 module.exports.verify = (req, res, next) => {
 	let token = req.headers.authorization;
 	if(typeof token === "undefined")
-		res.send(err.message);
+		res.send(`You need to login as Admin to add a product in the Database.`);
 	else{
 		token = token.slice(7, token.length);
 		jwt.verify(token, passkey, function(err, decoded) {

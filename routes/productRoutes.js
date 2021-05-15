@@ -4,10 +4,12 @@ const {viewAllProducts,
 	createProduct,
 	updateProduct,
 	archiveProduct } = require('./../controllers/productControllers.js')
+const Product = require('./../models/Product.js');	
+const {verify, verifyAdmin} = require('./../auth.js');
 
 router.get('/', viewAllProducts);
 router.get('/:prodId', viewSingleProduct);
-router.post('/', createProduct);
+router.post('/', verify, verifyAdmin, createProduct);
 router.put('/:prodId', updateProduct);
 router.put('/:prodId/archive', archiveProduct);
 module.exports = router;
