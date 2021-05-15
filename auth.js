@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const passkey = "ecommerceapi";
+const Order = require('./models/Order.js');
 
 module.exports.createAccessToken = (user) => {
 	let payload = {
@@ -14,7 +15,7 @@ module.exports.createAccessToken = (user) => {
 module.exports.verify = (req, res, next) => {
 	let token = req.headers.authorization;
 	if(typeof token === "undefined")
-		res.send(`You need to login as Admin to add a product in the Database.`);
+		res.send(`You need to login to do this action.`);
 	else{
 		token = token.slice(7, token.length);
 		jwt.verify(token, passkey, function(err, decoded) {
@@ -38,9 +39,9 @@ module.exports.verifyAdmin = (req, res, next) => {
 }
 
 module.exports.verifyUser = (req, res, next) => {
-	if (req.user.isAdmin)
-		res.send(`An Admin cannot do this action.`)
-	else{
+	if (!req.user.isAdmin)
 		next();
-	}
+	else
+		res.send(`An Admin cannot do this action.`)
+	
 }

@@ -25,12 +25,12 @@ const OrderSchema = new mongoose.Schema(
 
 			    quantity: {
 			    	type: Number,
-			    	required: true
+			    	required: false
 			    },
 
 			    subtotal: {
 			    	type: Number,
-			    	required: true
+			    	required: false
 		    	}
 		  	}
 		]

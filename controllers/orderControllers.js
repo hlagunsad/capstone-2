@@ -1,39 +1,18 @@
-module.exports.createOrder = (req, res) => 
-	res.send({
-		totalAmount: req.body.totalAmount,
-		purchasedOn: req.body.purchasedOn,
-		userId: req.body.userId,
-		products: [
-			{
-			    productId: req.body.productId,
-			    quantity: req.body.quantity,
-			    subtotal: req.body.subtotal
-		  	}
-		]
+const Order = require('./../models/Order.js');
+
+module.exports.createOrder = (req, res) => {
+	let newOrder = new Order({
+		totalAmount: req.body.products.length,
+    	userId: req.user.email,
+		products: req.body.products
 	});
-module.exports.myOrders = (req, res) => 
-	res.send({
-		totalAmount: req.body.totalAmount,
-		purchasedOn: req.body.purchasedOn,
-		userId: req.body.userId,
-		products: [
-			{
-			    productId: req.body.productId,
-			    quantity: req.body.quantity,
-			    subtotal: req.body.subtotal
-		  	}
-		]
-	});
+
+	newOrder.save().then( order => res.send(order)).catch( err => res.send(err.message));
+}
+	
+module.exports.myOrders = (req, res) => {
+	Order.find({userId: req.user.email}).then( order => res.send(order)).catch( err => res.send(err))
+}
+	
 module.exports.allOrders = (req, res) => 
-	res.send({
-		totalAmount: req.body.totalAmount,
-		purchasedOn: req.body.purchasedOn,
-		userId: req.body.userId,
-		products: [
-			{
-			    productId: req.body.productId,
-			    quantity: req.body.quantity,
-			    subtotal: req.body.subtotal
-		  	}
-		]
-	});	
+	Order.find().then( order => res.send(order)).catch( err => res.send(err))

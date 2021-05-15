@@ -1,9 +1,11 @@
 const Product = require('./../models/Product.js');
+
 module.exports.viewAllProducts = (req, res) => 
 	Product.find({isActive:true}).select({createdOn: 0, __v: 0, _id: 0}).then( product => res.send(product)).catch( err => res.send(err))
 
 module.exports.viewSingleProduct = (req, res) => 
 	Product.findById(req.params.prodId).then( product => res.send(product)).catch( err => res.send(err))
+
 module.exports.createProduct = (req, res) => {
 	let newProduct = new Product({
 		Name: req.body.Name,
