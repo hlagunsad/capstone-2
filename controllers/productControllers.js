@@ -1,10 +1,20 @@
 const Product = require('./../models/Product.js');
 
 module.exports.viewAllProducts = (req, res) => 
-	Product.find({isActive:true}).select({createdOn: 0, __v: 0, _id: 0}).then( product => res.send(product)).catch( err => res.send(err))
+	Product.find({isActive:true}).select({createdOn: 0, __v: 0})
+	.then( product => res.send(product))
+	.catch( err => res.send(err))
 
-module.exports.viewSingleProduct = (req, res) => 
-	Product.findById(req.params.prodId).then( product => res.send(product)).catch( err => res.send(err))
+module.exports.viewSingleProduct = (req, res) => {
+	Product.findById(req.params.prodId)
+	.then( product => {
+		if(product.isActive === false)
+			res.send(`Product is either deleted or not in the database.`)
+		else
+			res.send(product)
+	})
+	.catch( err => res.send(err))
+	}
 
 module.exports.createProduct = (req, res) => {
 	let newProduct = new Product({
@@ -13,7 +23,9 @@ module.exports.createProduct = (req, res) => {
 		Price: req.body.Price
 	});
 
-	newProduct.save().then( product => res.send(product)).catch( err => res.send(err.message));
+	newProduct.save()
+	.then( product => res.send(product))
+	.catch( err => res.send(err.message));
 }
 	
 module.exports.updateProduct = (req, res) => {
@@ -23,7 +35,9 @@ module.exports.updateProduct = (req, res) => {
 		Price: req.body.Price
 	}
 
-	Product.findByIdAndUpdate(req.params.prodId, updatedProduct).then( product => res.send(product)).catch( err => {res.send(false)})
+	Product.findByIdAndUpdate(req.params.prodId, updatedProduct)
+	.then( product => res.send(product))
+	.catch( err => {res.send(false)})
 }
 
 module.exports.archiveProduct = (req, res) => {
@@ -31,6 +45,8 @@ module.exports.archiveProduct = (req, res) => {
 		isActive: false
 	}
 
-	Product.findByIdAndUpdate(req.params.prodId, archivedProduct).then( product => res.send(product)).catch( err => {res.send(false)})
+	Product.findByIdAndUpdate(req.params.prodId, archivedProduct)
+	.then( product => res.send(product))
+	.catch( err => {res.send(false)})
 }
 

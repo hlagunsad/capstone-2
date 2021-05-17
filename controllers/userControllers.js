@@ -36,8 +36,7 @@ module.exports.login = (req, res) =>
 					if (!matchedPW)
 						res.send(`Wrong password.`);
 					else {
-						console.log({auth: createAccessToken(user)});
-						res.send(`Login successful.`)
+						res.send({auth: createAccessToken(user)})
 					}
 				}
 			}).catch( err => res.send(err.message))

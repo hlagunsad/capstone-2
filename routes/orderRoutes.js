@@ -3,7 +3,7 @@ const {createOrder, myOrders, allOrders} = require('./../controllers/orderContro
 const {verifyUser, verify, verifyAdmin} = require('./../auth.js');
 
 router.post('/', verify, verifyUser, createOrder);
-router.get('/myOrders', verify, verifyUser, myOrders);
+router.get('/myOrders', verify, myOrders);
 router.get('/', verify, verifyAdmin, allOrders);
 
 module.exports = router;
