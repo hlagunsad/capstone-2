@@ -181,6 +181,7 @@ products: [subdocument array of bought products:
   
   {
     productId: (string)
+    
     Stretch Goal:
     quantity: (number)
     subtotal: (number)
