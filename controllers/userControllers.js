@@ -21,7 +21,7 @@ module.exports.register = (req, res) =>
 						mobileNo: req.body.mobileNo,
 						password: hash
 					})
-				.then( user => res.send(user, {password:0}));
+				.then( user => res.send(user, {password:0}))
 				.catch( err => res.send(err.message));
 			}
 		}
@@ -29,7 +29,8 @@ module.exports.register = (req, res) =>
 
 module.exports.login = (req, res) => 
 	{
-		User.findOne({email: req.body.email}).then( user => 
+		User.findOne({email: req.body.email})
+		.then( user => 
 			{
 				if (!user)
 					res.send(`Login details (email) not found.`)
@@ -41,13 +42,14 @@ module.exports.login = (req, res) =>
 						res.send({auth: createAccessToken(user)});
 					}
 				}
-			}).catch( err => res.send(err.message))
+			})
+		.catch( err => res.send(err.message))
 	}
 
 module.exports.setToAdmin = (req, res) => {
 	let adminUser = { isAdmin: req.body.isAdmin }
 	User.findByIdAndUpdate(req.params.userId, adminUser, {strict: true})
-	.then( user => res.send(`User is now set to admin.`));
+	.then( user => res.send(`User is now set to admin.`))
 	.catch( err => res.send(err.message));
 }
 
