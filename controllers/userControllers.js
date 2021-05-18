@@ -49,16 +49,24 @@ module.exports.login = (req, res) =>
 module.exports.setToAdmin = (req, res) => {
 	let adminUser = { isAdmin: req.body.isAdmin }
 	User.findByIdAndUpdate(req.params.userId, adminUser, {strict: true})
-	.then( user => res.send(`${req.user.email} is now set to admin.`))
-	.catch( err => res.send(err.message));
+	.then( user => {
+		if (req.body.isAdmin === false)
+			res.send(`${req.user.email} is now set to normal User.`)
+		else 
+			res.send(`${req.user.email} is now set to admin.`)
+	})
+	.catch( err => res.send(err.message))
 }
 
 module.exports.editProfile = (req, res) => {
 	// let userProfile = { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, mobileNo: req.body.mobileNo}
 	User.findByIdAndUpdate(req.params.userId, {$set:req.body})
+	.select({password: 0})
 	.then( user => {
 		if (user.email !== req.user.email)
 			res.send(`You're not logged in to your correct account`);
+		else if (req.body.isAdmin === true || req.body.isAdmin === false)
+			res.send(`Invalid`)
 		else
 			res.send(user);
 	})
