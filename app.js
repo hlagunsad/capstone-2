@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.MONGOLAB_URI;
 const express = require('express');
 const port = process.env.PORT || 4000;
 const app = express();
@@ -11,7 +14,7 @@ const homepageRoutes = require('./routes/homepageRoutes.js')
 const apiRoutes = require('./routes/apiRoutes.js')
 
 
-mongoose.connect('mongodb+srv://hlagunsad:UR3cGE3CckOFBmH3@cluster0.dsnwi.mongodb.net/E-Commerce?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true}).then( () => {console.log(`Connected to the database.`)}).catch( err => {console.log(err.message)});
+mongoose.connect(`${process.env.MONGOLAB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true}).then( () => {console.log(`Connected to the database.`)}).catch( err => {console.log(err.message)});
 mongoose.set('returnOriginal', false);
 
 app.use(express.json());

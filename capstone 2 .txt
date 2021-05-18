@@ -1,3 +1,4 @@
+
 Objectives:
 Create an E-Commerce REST API MVP using ExpressJS
 Design Models appropriate for an E-Commerce use case.
