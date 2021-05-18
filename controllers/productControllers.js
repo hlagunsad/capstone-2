@@ -42,7 +42,7 @@ module.exports.updateProduct = (req, res) => {
 
 module.exports.archiveProduct = (req, res) => {
 	let archivedProduct = {
-		isActive: false
+		isActive: req.body.isActive
 	}
 
 	Product.findByIdAndUpdate(req.params.prodId, archivedProduct)
