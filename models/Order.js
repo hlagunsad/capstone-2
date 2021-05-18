@@ -20,10 +20,10 @@ const OrderSchema = new mongoose.Schema(
 			{
 			    productId: {
 			    	type: String,
-			    	required: false
+			    	required: true
 			    },
-
-			    quantity: {
+	    		
+	    		quantity: {
 			    	type: Number,
 			    	required: false
 			    },
