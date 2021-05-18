@@ -20,7 +20,9 @@ module.exports.register = (req, res) =>
 						email: req.body.email,
 						mobileNo: req.body.mobileNo,
 						password: hash
-					}).then( user => res.send(user)).catch( err => res.send(err.message));
+					})
+				.then( user => res.send(user, {password:0}));
+				.catch( err => res.send(err.message));
 			}
 		}
 	}
@@ -36,7 +38,7 @@ module.exports.login = (req, res) =>
 					if (!matchedPW)
 						res.send(`Wrong password.`);
 					else {
-						res.send({auth: createAccessToken(user)})
+						res.send({auth: createAccessToken(user)});
 					}
 				}
 			}).catch( err => res.send(err.message))
@@ -44,17 +46,19 @@ module.exports.login = (req, res) =>
 
 module.exports.setToAdmin = (req, res) => {
 	let adminUser = { isAdmin: req.body.isAdmin }
-	User.findByIdAndUpdate(req.params.userId, adminUser, {strict: true}).then( user => res.send(`User is now set to admin.`)).catch( err => res.send(err.message));
+	User.findByIdAndUpdate(req.params.userId, adminUser, {strict: true})
+	.then( user => res.send(`User is now set to admin.`));
+	.catch( err => res.send(err.message));
 }
 
 module.exports.editProfile = (req, res) => {
 	// let userProfile = { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, mobileNo: req.body.mobileNo}
-	User.findByIdAndUpdate(req.user.id, {$set:req.body})
+	User.findByIdAndUpdate(req.params.id, {$set:req.body})
 	.then( user => {
 		if (user.email !== req.user.email)
-			res.send(`You're not login to your account`)
+			res.send(`You're not login to your account`);
 		else
-			res.send(user)
+			res.send(user);
 	})
 	.catch( err => res.send(err.message));
 }
