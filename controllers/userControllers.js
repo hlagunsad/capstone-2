@@ -21,7 +21,7 @@ module.exports.register = (req, res) =>
 						mobileNo: req.body.mobileNo,
 						password: hash
 					})
-				.then( user => res.send(user, {password:0}))
+				.then( user => res.send(user))
 				.catch( err => res.send(err.message));
 			}
 		}
