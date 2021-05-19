@@ -51,9 +51,9 @@ module.exports.setToAdmin = (req, res) => {
 	User.findByIdAndUpdate(req.params.userId, adminUser, {strict: true})
 	.then( user => {
 		if (req.body.isAdmin === false)
-			res.send(`${req.user.email} is now set to normal User.`)
+			res.send(`${user.email} is now set to normal User.`)
 		else 
-			res.send(`${req.user.email} is now set to admin.`)
+			res.send(`${user.email} is now set to admin.`)
 	})
 	.catch( err => res.send(err.message))
 }
