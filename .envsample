@@ -1,0 +1,1 @@
+MONGOLAB_URI = mongodb+srv://<username>:<password>@cluster0.dsnwi.mongodb.net/E-Commerce?retryWrites=true&w=majority

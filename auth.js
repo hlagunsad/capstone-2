@@ -9,7 +9,7 @@ module.exports.createAccessToken = (user) => {
 		isAdmin : user.isAdmin
 	}
 	// set token to expire in 1 hour
-	return jwt.sign(payload, passkey, { expiresIn: 60 * 10 });
+	return jwt.sign(payload, passkey, { expiresIn: 60 * 60 * 12});
 	
 }
 
